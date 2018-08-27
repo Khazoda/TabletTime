@@ -1,7 +1,6 @@
 :root {
     --rowNum: 3; /*Number of Meds to remind + 1 (for headings)*/
     --borderColour: grey;
-
 }
 
 
@@ -12,14 +11,13 @@ html {box-sizing: border-box;}
 html, body {height: 100vh; margin: 0;}
 
 body {
-    border: 2px solid #1e1e1e;
-  overflow-y: hidden;
-  font-family: "Segoe UI", sans-serif;
-  background: #36393f; color: #FFF;
+    overflow-y: hidden;
+    font-family: "Segoe UI", sans-serif;
+    background: #36393f; color: #FFF;
 }
+
 h1 {margin: 0 0 10px 0; font-weight: 600; line-height: 1.2;}
 p {margin-top: 10px; color: rgba(255,255,255,0.4);}
-
 
 
 
@@ -27,10 +25,10 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     color: #FFF;
     padding: 4px;
     display: block;
-  position: fixed;
-  height: 32px;
-  width: calc(100% - 4px); /*Compensate for body 1px border*/
-  background: #202225;
+    position: fixed;
+    height: 32px;
+    width: 100%; /*Compensate for body 1px border*/
+    background: #202225;
 }
 
 #window-title {
@@ -60,67 +58,66 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
   }
 
 #main{
-  display:grid;
-  height: calc(100% - 32px);
-  width: 100%;
-  margin-top: 32px;
-  padding: 5px;
-  overflow-y: auto;
-  background-image: url("resources/background.svg");
-  background-repeat: repeat-y;
-  background-size: 100px 100px;
-  position: relative;
-  float: left;
+    display:grid;
+    height: calc(100% - 32px);
+    width: 100%;
+    margin-top: 32px;
+    padding: 5px;
+    overflow-y: auto;
+    background-image: url("resources/background.svg");
+    background-repeat: repeat-y;
+    background-size: 100px 100px;
+    position: relative;
+    float: left;
 }
 
 #menu-items {
-size: 100px 1000px;
-padding-left: 13px;
-padding-right: 13px;
-display: grid;
-grid-gap: 0px;
-position:absolute;
-grid-template-columns: 70px;
-grid-template-rows: 70px 70px 70px 70px 70px;
+    size: 100px 1000px;
+    padding-left: 13px;
+    padding-right: 13px;
+    display: grid;
+    grid-gap: 0px;
+    position:absolute;
+    grid-template-columns: 70px;
+    grid-template-rows: 70px 70px 70px 70px 70px;
 }
 
-
-#home-button {
-  background-image: url("resources/logo.svg");
-
-  transition:ease-in-out;
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  background-repeat: no-repeat;
-  min-width: 70px;
-  min-height: 70px;
+/*rules will be applied ONLY to direct children*/
+#menu-items > * {
+    transition: ease-out transform 0.3s;
+    -webkit-transition: ease-in-out -webkit-transform 0.3s;
+}
+#menu-items > *:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
 }
 
-#home-button:hover {
-background-image: url("resources/logoHover.svg");
+    #home-button {
+        background-image: url("resources/logo.svg");
+        background-repeat: no-repeat;
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    #home-button:hover {
+        background-image: url("resources/logoHover.svg");
+    }
+
+    #add-pill-button {
+        background-image: url("resources/addPill.svg");
+        background-repeat: no-repeat;
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    #add-pill-button:hover {
+        background-image: url("resources/addPillHover.svg");
+    }
+
+@keyframes hoverSpin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
-
-#add-pill-button {
-    background-image: url("resources/addPill.svg");
-
-    transition:ease-in-out;
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  background-repeat: no-repeat;
-  min-width: 70px;
-  min-height: 70px;
-  
-
-}
-
-#add-pill-button:hover {
-    background-image: url("resources/addPillHover.svg");
-}
-
 
 .reminders-container {
     
@@ -137,16 +134,16 @@ background-image: url("resources/logoHover.svg");
     grid-template-rows: 32px repeat(var(--rowNum), 100px);
     grid-template-areas: "RemindersHeader RemindersHeader RemindersHeader RemindersHeader"
                          "TimeHeader TabletTypeHeader DosageHeader NotesHeader";
-  }
+}
 
-  .reminders-container * {
+.reminders-container * {
     /*border: solid 1px white;*/
     border-right: solid 1px var(--borderColour);
     border-bottom:  solid 1px var(--borderColour);
 
-  }
+}
 
-  .TitleHeader {
+.TitleHeader {
     height: 32px;
     width: 100%;
     left: 50%;
@@ -164,9 +161,9 @@ background-image: url("resources/logoHover.svg");
     padding-bottom: 10px;
     border-right: transparent;
 
-  }
+}
   
-  .TimeHeader {
+.TimeHeader {
     height: 40px;
     display: grid;
     grid-area: TimeHeader;
@@ -175,12 +172,9 @@ background-image: url("resources/logoHover.svg");
     grid-template-areas: ".";
     align-items: center;
     justify-items: center;
-    
-    
-
-  }
+}
   
-  .TabletTypeHeader {
+.TabletTypeHeader {
     height: 40px;
     display: grid;
     grid-area: TabletTypeHeader;
@@ -190,19 +184,19 @@ background-image: url("resources/logoHover.svg");
     align-items: center;
     justify-items: center;
 
-  }
+}
   
-  .CommercialNameHeader { grid-area: CommercialNameHeader;
+.CommercialNameHeader { grid-area: CommercialNameHeader;
     border: transparent;
     align-items: center;
     justify-items: center; }
   
-  .ChemicalNameHeader { grid-area: ChemicalNameHeader;
+.ChemicalNameHeader { grid-area: ChemicalNameHeader;
     border: transparent;
     align-items: center;
     justify-items: center;}
   
-  .DosageHeader { grid-area: DosageHeader;
+.DosageHeader { grid-area: DosageHeader;
     height: 40px;
     display: grid;
     grid-template-columns: 1fr;
@@ -211,7 +205,7 @@ background-image: url("resources/logoHover.svg");
     align-items: center;
     justify-items: center; }
 
-  .NotesHeader { grid-area: NotesHeader;
+.NotesHeader { grid-area: NotesHeader;
     height: 40px;
     display: grid;
     grid-template-columns: 1fr;
