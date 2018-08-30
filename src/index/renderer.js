@@ -14,12 +14,12 @@ const { ipcRenderer } = require('electron');
 
     function init() {
         let window = remote.getCurrentWindow();
-        const minButton = document.getElementById('min-button'),
+        minButton = document.getElementById('min-button'),
         maxButton = document.getElementById('max-button'),
         restoreButton = document.getElementById('restore-button'),
         closeButton = document.getElementById('close-button'),
-        homeButton = document.getElementById('home-button');
-        addPillButton = document.getElementById('add-pill-button')
+        homeButton = document.getElementById('home-button'),
+        addPillButton = document.getElementById('add-pill-button');
             
             
         addPillButton.addEventListener("click", event =>{
