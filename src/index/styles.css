@@ -28,7 +28,7 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     position: fixed;
     height: 32px;
     width: 100%; /*Compensate for body 1px border*/
-    background: #202225;
+    background: #202226;
 }
 
 #window-title {
