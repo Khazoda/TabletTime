@@ -2,6 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 const remote = require('electron').remote;
+const { ipcRenderer } = require('electron');
 
 (function handleWindowControls() {
     // When document has loaded, initialise
@@ -14,12 +15,18 @@ const remote = require('electron').remote;
     function init() {
         let window = remote.getCurrentWindow();
         const minButton = document.getElementById('min-button'),
-            maxButton = document.getElementById('max-button'),
-            restoreButton = document.getElementById('restore-button'),
-            closeButton = document.getElementById('close-button'),
-            homeButton = document.getElementById('home-button');
-
-
+        maxButton = document.getElementById('max-button'),
+        restoreButton = document.getElementById('restore-button'),
+        closeButton = document.getElementById('close-button'),
+        homeButton = document.getElementById('home-button');
+        addPillButton = document.getElementById('add-pill-button')
+            
+            
+        addPillButton.addEventListener("click", event =>{
+            window = remote.getCurrentWindow();
+            ipcRenderer.send('init-add-pill-window');
+         
+        });
 
         homeButton.addEventListener("click", event => {
             window = remote.getCurrentWindow();
@@ -66,5 +73,8 @@ const remote = require('electron').remote;
                 maxButton.style.display = "flex";
             }
         }
+
+        /* Here's where the document error comes from */
+        
     }
 })();

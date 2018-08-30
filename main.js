@@ -1,10 +1,10 @@
 const {app, BrowserWindow} = require('electron');
+const {ipcMain} = require('electron');
 
 app.on('ready', () => {
 let mainWin = null;
 const loadingScreen = 'src/loading/loading.html';
 const mainScreen = 'src/index/index.html';
-const addPillScreen = 'src/addPill/addPill.html';
 
 loadMain(loadingScreen, mainScreen);
 });
@@ -29,13 +29,14 @@ function  loadSplash (loadingScreen) {
     return loadingWin;
 };
 
-/* Here's where the document error comes from */
-document.getElementById("add-pill-button").addEventListener("click", function(){
-    document.getElementById("demo").innerHTML = "Hello World";
+ipcMain.on('init-add-pill-window', (event) => {
+    const addPillScreen = 'src/addPill/addPill.html';
+    let addPillWin = new BrowserWindow({width: 400, height: 800, parent:mainWin, frame: false, show: true, backgroundColor: '#2e2c29'});
+    addPillWin.loadFile(addPillScreen);
+    addPillWin.once('ready-to-show', () => {
+        addPillWin.show();
+    })
 });
-
-
-
 
 app.on('window-all-closed', () => {
     app.quit();
