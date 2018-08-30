@@ -2,8 +2,8 @@ const {app, BrowserWindow} = require('electron');
 
 app.on('ready', () => {
 let mainWin = null;
-const loadingScreen = 'src/loading.html';
-const mainScreen = 'src/index.html';
+const loadingScreen = 'src/loading/loading.html';
+const mainScreen = 'src/index/index.html';
 loadMain(loadingScreen, mainScreen);
 });
 
