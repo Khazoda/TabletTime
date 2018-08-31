@@ -19,4 +19,4 @@ const { ipcRenderer } = require('electron');
             window.close();
         });
     }
-});
+})();
