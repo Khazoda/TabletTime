@@ -19,8 +19,6 @@ body {
 h1 {margin: 0 0 10px 0; font-weight: 600; line-height: 1.2;}
 p {margin-top: 10px; color: rgba(255,255,255,0.4);}
 
-
-
 #titlebar{
     color: #FFF;
     padding: 4px;
@@ -35,7 +33,7 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     grid-column: 1;
     display: flex;
     align-items: center;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Quicksand", sans-serif;
     font-size: 12px;
     margin-left: 8px;
     overflow-x: hidden;
@@ -45,8 +43,6 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.5;
-
-    
   }
 
 #titlebar #drag-region {
@@ -62,7 +58,6 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     height: calc(100% - 32px);
     width: 100%;
     margin-top: 32px;
-    padding: 5px;
     overflow-y: auto;
     background-image: url("resources/background.svg");
     background-repeat: repeat-y;
@@ -120,14 +115,13 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
 }
 
 .reminders-container {
-    
-
     size: 100% 100%;
     left:100px;
     width: calc(100% - 100px);
-    font-family: Helvetica Neue, Helvetica, Liberation Sans, Arial, sans-serif;
+    font-family: 'Quicksand', sans-serif;
     position: relative;
     top:0;
+    padding: 10px;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -140,13 +134,11 @@ p {margin-top: 10px; color: rgba(255,255,255,0.4);}
     /*border: solid 1px white;*/
     border-right: solid 1px var(--borderColour);
     border-bottom:  solid 1px var(--borderColour);
-
 }
 
 .TitleHeader {
     height: 32px;
     width: 100%;
-    left: 50%;
     font-size: 140%;
     text-shadow: 2px 2px black;
 
