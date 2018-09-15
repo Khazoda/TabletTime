@@ -50,6 +50,7 @@ ipcMain.on('init-add-pill-window', (event) => {
     })
 });
 
+
 app.on('window-all-closed', () => {
     app.quit();
   });

@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "electron-reload": "^1.2.5",
-    "hover.css": "^2.3.2"
+    "hover.css": "^2.3.2",
+    "materialize-css": "^1.0.0-rc.2"
   },
   "build": {
     "appId": "com.tablettime.app",

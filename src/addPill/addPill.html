@@ -2,7 +2,8 @@
 <html>
 <header id = "titlebar">
     <link rel="stylesheet" href="addPillStyles.css">
-
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    
     <div id = "drag-region">
         <div id = "window-controls">
             <div class="button" id="close-button">
@@ -17,26 +18,33 @@
 
 <body>
 
-    <form id = "form-container">
+    <form id = "form-container" action = "/main.js">
         <div id = "title">
             Add Medication
         </div>
 
         <div id = "tablet-type-container">
-            <input type = "text"  id = "brand-name" placeholder = "Brand Name e.g Advil">
-            <input type = "text"  id = "generic-name" placeholder = "Generic Name e.g Ibuprofen">
+            <input type = "text"  id = "brand-name" placeholder = "Brand Name">
+            <input type = "text"  id = "generic-name" placeholder = "Generic Name">
         </div>
 
-        <div id = "dosage">Dosage</div>
+        <input type = "text" id = "dosage" placeholder = "Dosage">
 
         <div id = time-container>
-            <div id = "take-at">Take At</div>
-            <div id = "am-pm">AM</div>
+            <input type = "text" id = "take-at" placeholder = "Take At">
+
+            <div class = "default-select">
+                <select name = am-or-pm id = "am-pm">
+                    <option value = "Select an Option">Select</option>
+                    <option value = "AM">AM</option>
+                    <option value = "PM">PM</option>
+                </select>
+            </div>
         </div>
 
-        <div id = "further-notes">Further Notes</div>
+        <textarea type = "textarea" rows = "20" cols = "30" id = "further-notes" placeholder="Further Notes"></textarea>
         
-        <div id = "confirm-button" class = "button" onclick>Confirm</div>
+        <input type="button" id = "confirm-button" onclick="submitForm()" value="Confirm"></div>
     </form>
 
 
@@ -47,5 +55,10 @@
 <script>
     // You can also require other files to run in this process
     require('./addPillRenderer.js')
+
+    function submitForm(){
+        document.getElementById("form-container").submit();
+    }
+
 </script>
 </html>

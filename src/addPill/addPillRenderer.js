@@ -1,6 +1,7 @@
 const electron = require('electron');
 const remote = require('electron').remote;
 const { ipcRenderer } = require('electron');
+const mcss = require('materialize-css');
 
 (function handleWindowControls() {
     // When document has loaded, initialise
@@ -19,4 +20,6 @@ const { ipcRenderer } = require('electron');
             window.close();
         });
     }
+
+    
 })();

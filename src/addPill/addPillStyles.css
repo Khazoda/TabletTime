@@ -1,5 +1,6 @@
 :root {
     --borderColour: grey;
+    --defaultFontFamily: "Quicksand", sans-serif;
 }
 
 
@@ -22,7 +23,7 @@ body {
     height: 32px;
     width: 100%; /*Compensate for body 1px border*/
     background-color: #202226;
-    font-family: "Quicksand", sans-serif;
+    font-family: var(--defaultFontFamily);
 }
 
 #titlebar #drag-region {
@@ -38,23 +39,20 @@ body {
     top: 32px;
     padding: 10px;
         
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--defaultFontFamily);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 32px 40px 40px 40px 80px 60px;
+    grid-template-rows: 32px 40px 40px 40px 525px 60px;
     grid-template-areas:"title title"
                         "tablet-type-container tablet-type-container"
                         "dosage dosage"
                         "time-container time-container"
                         "further-notes further-notes"
                         "confirm-button confirm-button";
-    grid-gap: 1.6% 1.6%;
 
 }
 
-#form-container * {
-    border-bottom: solid 1px var(--borderColour);
-}
+
 
 #title {
     height: 32px;
@@ -84,20 +82,25 @@ body {
     justify-items: center;
     align-items: center;
     padding-bottom: 0px;
+    border-bottom: solid 1px var(--borderColour);
+
 }
 
-#tablet-type-container * {
+#tablet-time-container * {
     border-bottom: none;
+    height: 100%;
+    display: grid;
+}
+
+input {
     font-family: inherit;
     font-size: 100%;
-    font-stretch: expanded;
-    height: 30px;
-    width: 160px;
+    height: 40px;
+    width: 100%;
     position: relative;
     vertical-align: middle;
     background-color: transparent;
     color: white;
-    text-align: center;
     
 }
 
@@ -113,31 +116,65 @@ input:focus {
 #dosage { 
     display: grid;
     grid-area: dosage;
-    grid-template: 1fr 1fr;
     grid-template-areas: ".";
 
     justify-items: center;
     align-items: center;
+    border-bottom: solid 1px var(--borderColour);
+
 }
 
 #time-container {
     display: grid;
     grid-area: time-container;
-    grid-template: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas: ".";
 
-    justify-items: center;
+    justify-items: left;
     align-items: center;
+    border-bottom: solid 1px var(--borderColour);
+}
+
+time {
+    overflow: hidden;
+}
+
+select {
+    font-family: var(--defaultFontFamily);
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    vertical-align: middle;
+    color: white;
+    align-self: left;
+    border: none;
+    box-shadow: none;
+    background-color: #43474e;
+                                                    
+}
+
+select:focus {
+    outline: none;
 }
 
 #further-notes {
     display: grid;
     grid-area: further-notes;
-    grid-template: 1fr 1fr;
     grid-template-areas: ".";
+    vertical-align: top;
+    text-align: start;
+    width: 100%;
+    height: 525px;
+    font-family: var(--defaultFontFamily);
+    font-size: 16px;
+    color: white;
+    outline: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    resize: none;
+    overflow: hidden;
+    background-color: transparent;
 
-    justify-items: center;
-    align-items: center;
 }
 
 #confirm-button {
@@ -146,12 +183,24 @@ input:focus {
     grid-template: 1fr 1fr;
     grid-template-areas: ".";
 
+    color:white;
+    font-family: var(--defaultFontFamily);
+    font-size: 100%;
+    font-style: bold;
+
+    border: 2px solid black;
+    background-color: #e42659;
+
     justify-items: center;
     align-items: center;
+
+    transition: ease-in-out;
+    transition-duration: 0.2s;
 }
 
-#confirm-button .button:hover {
-
+#confirm-button:hover {
+    background-color: #4e4e4e;
+    border: 2px solid white;
 }
 
 #window-controls {
