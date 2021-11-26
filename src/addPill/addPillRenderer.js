@@ -1,9 +1,9 @@
-const electron = require('electron');
-const remote = require('electron').remote;
+const remote = require('@electron/remote')
 const { ipcRenderer } = require('electron');
-const mcss = require('materialize-css');
+
 
 (function handleWindowControls() {
+
     // When document has loaded, initialise
     document.onreadystatechange = () => {
         if (document.readyState == "complete") {
@@ -11,15 +11,15 @@ const mcss = require('materialize-css');
         }
     };
 
-    function init(){
-        let window = remote.getCurrentWindow();
+    function init() {
+        let win = remote.getCurrentWindow();
         closeButton = document.getElementById('close-button');
 
         closeButton.addEventListener("click", event => {
-            window = remote.getCurrentWindow();
-            window.close();
+            win = remote.getCurrentWindow();
+            win.close();
         });
     }
 
-    
+
 })();
