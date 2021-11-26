@@ -57,12 +57,13 @@ body {
     font-family: var(--defaultFontFamily);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 32px 40px 40px 40px 525px 60px;
+    grid-template-rows: 32px 40px 40px 40px 40px 485px 60px;
     grid-template-areas:
         "title title"
         "tablet-type-container tablet-type-container"
         "dosage dosage"
         "time-container time-container"
+        "icon-and-inventory-container icon-and-inventory-container"
         "further-notes further-notes"
         "confirm-button confirm-button";
 }
@@ -165,7 +166,12 @@ select {
 select:focus {
     outline: none;
 }
-
+#icon-and-inventory-container {
+    grid-area: icon-and-inventory-container;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
 #further-notes {
     display: grid;
     grid-area: further-notes;

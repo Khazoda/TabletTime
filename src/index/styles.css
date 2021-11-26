@@ -117,6 +117,7 @@ p {
 
 #home-button:hover {
     background-image: url("resources/logoHover.svg");
+    cursor: pointer;
 }
 
 #add-pill-button {
@@ -128,6 +129,7 @@ p {
 
 #add-pill-button:hover {
     background-image: url("resources/addPillHover.svg");
+    cursor: pointer;
 }
 
 @keyframes hoverSpin {
@@ -139,7 +141,7 @@ p {
     }
 }
 
-.reminders-container {
+.medication-container {
     size: 100% 100%;
     left: 100px;
     width: calc(100% - 100px);
@@ -147,21 +149,48 @@ p {
     position: relative;
     top: 0;
     padding: 10px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.medication-table {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 32px repeat(var(--rowNum), 100px);
     grid-template-areas:
         "RemindersHeader RemindersHeader RemindersHeader RemindersHeader"
         "TimeHeader TabletTypeHeader DosageHeader NotesHeader";
+*/
 }
 
-.reminders-container * {
-    /*border: solid 1px white;*/
-    border-right: solid 1px var(--borderColour);
-    border-bottom: solid 1px var(--borderColour);
+#medication-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
 }
-
+#medication-list li {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#medication-list li div {
+    display: flex;
+    flex-direction: row;
+}
+#medication-list li div img {
+    margin-right: 10px;
+    max-width: 32px;
+    max-height: 32px;
+}
+#medication-list li div img:hover {
+    cursor: pointer;
+    content: url("resources/default_pill_delete.png");
+}
+#medication-list li div div {
+    line-height: 32px;
+}
+#medication-list li div.current-inventory {
+    margin-left: auto;
+    margin-right: 25px;
+}
 .TitleHeader {
     height: 32px;
     width: 100%;
@@ -178,6 +207,21 @@ p {
     justify-items: center;
     padding-bottom: 10px;
     border-right: transparent;
+}
+.TitleSubHeader {
+    padding-left: 42px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+.TitleSubHeader h3 {
+    font-size: 1em;
+    font-weight: 500;
 }
 
 .TimeHeader {

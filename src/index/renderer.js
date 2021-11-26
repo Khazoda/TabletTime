@@ -3,6 +3,8 @@
 // All of the Node.js APIs are available in this process.
 const remote = require('@electron/remote');
 const { ipcRenderer } = require('electron');
+const fs = require('fs');
+const path = require("path");
 
 // Window Controls
 (function handleWindowControls() {
@@ -79,7 +81,6 @@ const { ipcRenderer } = require('electron');
 })();
 
 // Medication Handling
-
 const deleteMed = (e) => {
     ipcRenderer.send('delete-med', e.target.textContent);
 }
@@ -90,7 +91,13 @@ ipcRenderer.on('meds', (event, meds) => {
 
     // Create html string
     const MedItems = meds.reduce((html, med) => {
-        html += `<li class="med-item">${med}</li>`
+        html += `<li class="med-item">
+        <div>
+            <img src='${med.icon}'></img>
+            <div>${med.generic_name}</div>
+        </div>
+        <div class="current-inventory">${med.current_inventory}</div>
+        </li>`
         return html
     }, '')
     console.log(medList);
