@@ -21,5 +21,16 @@ const { ipcRenderer } = require('electron');
         });
     }
 
-
 })();
+
+// Form Handling
+document.getElementById('form-container').addEventListener('submit', (e) => {
+    // Prevents default form refresh behaviour
+    e.preventDefault();
+
+    const input = e.target[0]
+
+    ipcRenderer.send('add-med', input.value)
+
+    input.value = ''
+})

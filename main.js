@@ -4,6 +4,10 @@ const { ipcMain } = require('electron');
 let remoteMain = require('@electron/remote/main');
 remoteMain.initialize();
 
+// Constants
+const DataStore = require("./DataStore.js");
+const medsData = new DataStore({ name: "Meds Main" })
+
 app.on('ready', () => {
     const loadingScreen = 'src/loading/loading.html';
     const mainScreen = 'src/index/index.html';
@@ -32,6 +36,11 @@ function loadMain(loadingScreen, mainScreen) {
         mainWin.show();
     })
 
+    // Initialize mainWin with meds
+    mainWin.once('show', () => {
+        mainWin.webContents.send('meds', medsData.meds)
+    })
+
 };
 
 function loadSplash(loadingScreen) {
@@ -51,36 +60,54 @@ function loadSplash(loadingScreen) {
     return loadingWin;
 };
 
+// Initialize empty var to check existence against
+let addPillWin = null;
+
 ipcMain.on('init-add-pill-window', (event) => {
     const addPillScreen = 'src/addPill/addPill.html';
-    let addPillWin = new BrowserWindow({
-        width: 400, height: 800, minWidth: 400, minHeight: 800, parent: mainWin, transparent: false, frame: false, show: true, backgroundColor: '#202226', webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
+    if (!addPillWin) {
+        addPillWin = new BrowserWindow({
+            width: 400, height: 800, minWidth: 400, minHeight: 800, parent: mainWin, transparent: false, frame: false, show: true, backgroundColor: '#202226', webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+                enableRemoteModule: true,
+            }
+        });
+
+        remoteMain.enable(addPillWin.webContents);
+
+        addPillWin.loadFile(addPillScreen);
+
+        var mainWinSize = mainWin.getSize();
+        var mainWinPosition = mainWin.getPosition();
+        var mainCentre = [mainWinSize[0] / 2, mainWinSize[1] / 2];
+
+        if (mainWin.isMaximized() == true) {
+            addPillWin.setPosition(mainWinPosition[0] + mainWinSize[0] - 400, mainWinPosition[1] + mainWinSize[1] / 2 / 2); /*change the y value if the positioning ends up being unsatisfactory*/
+        } else {
+            addPillWin.setPosition(mainWinPosition[0] + mainWinSize[0], mainWinPosition[1]); /* offsetting the add pill window to the right of the main window*/
         }
-    });
 
-    remoteMain.enable(addPillWin.webContents);
 
-    addPillWin.loadFile(addPillScreen);
-
-    var mainWinSize = mainWin.getSize();
-    var mainWinPosition = mainWin.getPosition();
-    var mainCentre = [mainWinSize[0] / 2, mainWinSize[1] / 2];
-
-    if (mainWin.isMaximized() == true) {
-        addPillWin.setPosition(mainWinPosition[0] + mainWinSize[0] - 400, mainWinPosition[1] + mainWinSize[1] / 2 / 2); /*change the y value if the positioning ends up being unsatisfactory*/
-    } else {
-        addPillWin.setPosition(mainWinPosition[0] + mainWinSize[0], mainWinPosition[1]); /* offsetting the add pill window to the right of the main window*/
+        addPillWin.once('ready-to-show', () => {
+            console.log("Add Pill Window Loaded.")
+            addPillWin.show();
+        })
+        addPillWin.on('closed', () => {
+            addPillWin = null;
+        })
     }
-
-
-    addPillWin.once('ready-to-show', () => {
-        console.log("Add Pill Window Loaded.")
-        addPillWin.show();
-    })
 });
+
+ipcMain.on('add-med', (event, med) => {
+    const updatedMeds = medsData.addMed(med).meds;
+    mainWin.send('meds', updatedMeds);
+})
+
+ipcMain.on('delete-med', (event, med) => {
+    const updatedMeds = medsData.deleteMed(med).meds;
+    mainWin.send('meds', updatedMeds);
+})
 
 
 app.on('window-all-closed', () => {

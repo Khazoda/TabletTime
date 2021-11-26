@@ -4,8 +4,7 @@
 const remote = require('@electron/remote');
 const { ipcRenderer } = require('electron');
 
-// Tooltips
-
+// Window Controls
 (function handleWindowControls() {
     // When document has loaded, initialise
     document.onreadystatechange = () => {
@@ -78,3 +77,27 @@ const { ipcRenderer } = require('electron');
         }
     }
 })();
+
+// Medication Handling
+
+const deleteMed = (e) => {
+    ipcRenderer.send('delete-med', e.target.textContent);
+}
+
+ipcRenderer.on('meds', (event, meds) => {
+    // Get Medication List ul
+    const medList = document.getElementById('medication-list');
+
+    // Create html string
+    const MedItems = meds.reduce((html, med) => {
+        html += `<li class="med-item">${med}</li>`
+        return html
+    }, '')
+    console.log(medList);
+    // populate medList with meds
+    medList.innerHTML = MedItems;
+
+    medList.querySelectorAll('.med-item').forEach(item => {
+        item.addEventListener('click', deleteMed)
+    })
+})
