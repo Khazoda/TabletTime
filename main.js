@@ -24,6 +24,8 @@ function loadMain(loadingScreen, mainScreen) {
 
     mainWin.loadFile(mainScreen);
     loadingWin = loadSplash(loadingScreen);
+
+
     mainWin.once('ready-to-show', () => {
         loadingWin.hide();
         loadingWin.close();
