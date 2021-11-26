@@ -1,6 +1,6 @@
 {
   "name": "tablettime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Keep track of your medication",
   "main": "main.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "build": {
     "appId": "com.tablettime.app",
+    "productName": "Tablet Time",
     "mac": {
       "category": "Health"
     }
